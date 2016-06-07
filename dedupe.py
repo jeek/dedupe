@@ -29,7 +29,6 @@ if __name__ == "__main__":
         help="path to start from")
     args = parser.parse_args()
     minsize = vars(args)['minsize']
-    print((vars(args), minsize))
 
     # Ensure the specified hashing algorithm exists
     if vars(args)['hashlib'] not in hashlib.algorithms_available:
@@ -75,14 +74,14 @@ if __name__ == "__main__":
                             os.remove(sizes[currentsize][j])
                             ok_to_link = True
                         except OSError as e:
-                            print((e, sizes[currentsize][i], '->',
-                              sizes[currentsize][j]))
+                            print(str(e) + sizes[currentsize][i] + ' -> ' +
+                              sizes[currentsize][j])
                             pass
                         if ok_to_link:
                             os.link(sizes[currentsize][i],
                               sizes[currentsize][j])
-                            print((sizes[currentsize][i], '->',
-                              sizes[currentsize][j]))
+                            print(sizes[currentsize][i] + ' -> ' +
+                              sizes[currentsize][j])
                             sizes[currentsize].pop(j)
                         else:
                             j += 1
